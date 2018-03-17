@@ -49,7 +49,7 @@ for x in range(0,len(expressao)):
             pilha.push(expressao[x])
         elif expressao[x] == ')':
             while (pilha.top() != '(') :
-                posfixa[x] = pilha.pop()
+                posfixa += pilha.pop()
             pilha.pop()
         else:
             while prec(expressao[x],pilha.top()) == "maior":
