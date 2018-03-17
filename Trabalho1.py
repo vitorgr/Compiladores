@@ -24,6 +24,10 @@ class Stack: #Constructor creates a list
         return self.stack.pop() #Getting the size of the stack 
     def size(self): 
         return len(self.stack) 
+    def top(self):
+        top=self.pop()
+        self.push(top)
+        return top
 
 
 def ehop(simb):
