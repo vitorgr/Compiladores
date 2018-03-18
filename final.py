@@ -40,15 +40,47 @@ def ehop(simb):
     else:
         return Operando
 
+def imp(exp):
+    aux =""
+    x = 0
+    if len(exp)>1:
+        
+        for x in range(0,len(exp)-1):
+        #while (x < (len(exp)-1)) :
+            if exp[x] == '.' and ehop(exp[x+1]) == 1 :
+                aux += exp[x+1]
+            elif exp[x] == '*' and ehop(exp[x+1]) == 1: # *a
+                aux += exp[x] + "." + exp[x+1]
+                
+            elif exp[x] == '*' and exp[x+1] == '(' : # *(
+                aux += exp[x] + "." + exp[x+1]
+                
+            elif exp[x] == ')' and exp[x+1] == '(' : # )(
+                aux += exp[x] + "." + exp[x+1]
+                
+            elif ehop(exp[x]) == 1 and ehop(exp[x+1]) == 1 : # aa
+                aux += exp[x] + "." + exp[x+1]
+                
+            elif ehop(exp[x]) == 1 and exp[x+1] == '(' : # a(
+                aux += exp[x] + "." + exp[x+1]
+                
+            elif exp[x] == ')' and ehop(exp[x+1]) == 1 : # )a
+                aux += exp[x] + "." + exp[x+1]
+                break
+             
+            else:
+                aux += exp[x]
+        return aux
+    else:
+        return exp
+
 
 expressao=input('Entre com a expressão\n')
-
+aux = imp(expressao)
+print('expressão: ', aux)
 posfixa = ""
 pilha = Stack()
-for x in range(0,len(expressao)):
-    #if x+1<len(expressao):
-       # if (ehop(expressao[x]) == 1 and ehop(expressao[x+1]) == 1) or (ehop(expressao[x])==1 and expressao[x+1] == '(') or (expressao[x] == ')' and ehop(expressao[x+1])) or (expressao[x] == '*' and ehop(expressao[x+1]) ==1) or (expressao[x] == ')' and expressao[x+1] =='('):     
-        #    pilha.push(".")
+"""for x in range(0,len(expressao)):
     if ehop(expressao[x]) == 1:
         posfixa += expressao[x]
     else:
@@ -102,7 +134,7 @@ if p2.top() == NULL:
     
 print('posfixa:final ', posfixa)
 print('pilha:final ',pilha.size())
-
+"""
 
 
 
