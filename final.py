@@ -47,9 +47,9 @@ def imp(exp):
         
         for x in range(0,len(exp)-1):
         #while (x < (len(exp)-1)) :
-            if exp[x] == '.' and ehop(exp[x+1]) == 1 :
-                aux += exp[x+1]
-            elif exp[x] == '*' and ehop(exp[x+1]) == 1: # *a
+            if (exp[x] == '.' and ehop(exp[x+1]) == 1) or (exp[x] == '.' and exp[x+1] == '(') or (ehop(exp[x]) == 1 and exp[x+1] == '.') or (exp[x] == '*' and exp[x+1] == '.') or (exp[x] == '.' and exp[x+1] == '*') or (exp[x] == ')' and exp[x+1] == '.')  :
+                return exp    
+            if exp[x] == '*' and ehop(exp[x+1]) == 1: # *a
                 aux += exp[x] + "." + exp[x+1]
                 
             elif exp[x] == '*' and exp[x+1] == '(' : # *(
@@ -66,7 +66,7 @@ def imp(exp):
                 
             elif exp[x] == ')' and ehop(exp[x+1]) == 1 : # )a
                 aux += exp[x] + "." + exp[x+1]
-                break
+                
              
             else:
                 aux += exp[x]
@@ -97,14 +97,11 @@ pilha = Stack()
             while expressao[x] == '*' and pilha.top() =='*' or expressao[x] == '+' and pilha.top() =='+' or expressao[x] == '.' and pilha.top() =='.' or expressao[x] == '+' and pilha.top() =='*' or expressao[x] == '.' and pilha.top() =='*' or expressao[x] == '+' and pilha.top() =='.':
                # print('pilha: ', pilha.top())
                 posfixa += pilha.pop()
-
             pilha.push(expressao[x])
     
 while pilha.size() != 0 :
     #print('pilha: ', pilha.top())
-
     posfixa += pilha.pop()
-
     
 p2 =Stack()
 for y in range(0, len(posfixa)):
@@ -126,26 +123,10 @@ for y in range(0, len(posfixa)):
                     print("deu ruim")
         else:   
             print("deu ruim")            
-
 op1 = p2.pop()
 if p2.top() == NULL:
     print('Deu bom')
-
     
 print('posfixa:final ', posfixa)
 print('pilha:final ',pilha.size())
 """
-
-
-
-
-
-
-
-
-
-
-
-
-
-
